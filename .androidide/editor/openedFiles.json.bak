@@ -1,0 +1,20 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/MoonLeaf/Projects/AndLuaFrame/app/build.gradle",
+      "selection": {
+        "end": {
+          "column": 23,
+          "index": 150,
+          "line": 6
+        },
+        "start": {
+          "column": 23,
+          "index": 150,
+          "line": 6
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/MoonLeaf/Projects/AndLuaFrame/app/build.gradle"
+}

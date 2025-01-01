@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="andlua1">#FF1976d2</color>
+	<color name="andlua2">#FFFF4081</color>
+	<color name="andlua3">#FF607D8B</color>
+	<color name="andlua4">#FF455A64</color>
+	<color name="andlua5">#FF2196F3</color>
+	<color name="andlua6">#FFD32F2F</color>
+	<color name="andlua7">#FFF44336</color>
+	<color name="andlua8">#FF795548</color>
+	<color name="andlua9">#FF5D4037</color>
+	<color name="andlua10">#FFFFC107</color>
+	<color name="andlua11">#FFFF9800</color>
+	<color name="andlua12">#FFF57C00</color>
+	<color name="andlua13">#FF9E9E9E</color>
+	<color name="andlua14">#FF000000</color>
+	<color name="andlua15">#FF388E3C</color>
+	<color name="andlua16">#FF8BC34A</color>
+	<color name="andlua17">#FF9C27B0</color>
+	<color name="andlua18">#FF009688</color>
+	<color name="andlua19">#FF7870BB</color>
+</resources>

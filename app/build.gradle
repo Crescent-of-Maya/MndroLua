@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'io.github.moonleeeaf.androlua'
+    compileSdk 34
+    
+    defaultConfig {
+        applicationId "io.github.moonleeeaf.androlua"
+        minSdk 21
+        // 严重的坑: 当设置为 31 时, 将忽略uses-sdk
+        // 然而我需要最低兼容 sdk21, Shizuku并非必须
+        // 本程序所生成的软件将不能提交给 Google play(至少和我没任何关系)
+        targetSdk 30
+        versionCode 10000
+        versionName "1.0.0"
+        
+        vectorDrawables { 
+            useSupportLibrary true
+        }
+        
+        // 目前暂时不需要用Android-IDE编译C代码
+        // 因此先用以前编译的代码
+        // AndLua原本编译的无法使用 string.dump
+        // 因此需要自己编译一份
+        
+        /* ndk {
+            abiFilters 'armeabi-v7a'
+        } */
+    }
+	
+    /*
+    // 该死的 为什么死活没有aidl编译过程
+    // 真tm该死 浪费半天时间
+    sourceSets {
+        main {
+            java.srcDirs = ['src/main/java', 'src/main/aidl']
+        }
+    }
+    */
+    
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+        debug {
+            debuggable true
+            jniDebuggable true
+        }
+    }
+    /* externalNativeBuild {
+        ndkBuild {
+            path 'src/main/jni/android.mk'
+        }
+    } */
+    productFlavors {
+    }
+}
+
+dependencies {
+    // 不知道为什么Release的时候会重复
+    implementation 'com.android.support:support-annotations:28.0.0'
+    
+    implementation project(":moon3")
+    
+    implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
+    implementation "dev.rikka.shizuku:api:13.1.5"
+    implementation "dev.rikka.shizuku:provider:13.1.5"
+}

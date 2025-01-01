@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="AndLua1" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua1</item>
+        <item name="android:colorPrimaryDark">@color/andlua1</item>
+        <item name="android:colorAccent">@color/andlua1</item>
+		<item name="android:statusBarColor">@color/andlua1</item>
+	</style>
+
+	<style name="AndLua2" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua2</item>
+        <item name="android:colorPrimaryDark">@color/andlua2</item>
+        <item name="android:colorAccent">@color/andlua2</item>
+		<item name="android:statusBarColor">@color/andlua2</item>
+	</style>
+
+	<style name="AndLua3" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua3</item>
+        <item name="android:colorPrimaryDark">@color/andlua3</item>
+        <item name="android:colorAccent">@color/andlua3</item>
+		<item name="android:statusBarColor">@color/andlua3</item>
+	</style>
+
+	<style name="AndLua4" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua4</item>
+        <item name="android:colorPrimaryDark">@color/andlua4</item>
+        <item name="android:colorAccent">@color/andlua4</item>
+		<item name="android:statusBarColor">@color/andlua4</item>
+	</style>
+
+	<style name="AndLua5" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua5</item>
+        <item name="android:colorPrimaryDark">@color/andlua5</item>
+        <item name="android:colorAccent">@color/andlua5</item>
+		<item name="android:statusBarColor">@color/andlua5</item>
+	</style>
+
+	<style name="AndLua6" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua6</item>
+        <item name="android:colorPrimaryDark">@color/andlua6</item>
+        <item name="android:colorAccent">@color/andlua6</item>
+		<item name="android:statusBarColor">@color/andlua6</item>
+	</style>
+
+	<style name="AndLua7" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua7</item>
+        <item name="android:colorPrimaryDark">@color/andlua7</item>
+        <item name="android:colorAccent">@color/andlua7</item>
+		<item name="android:statusBarColor">@color/andlua7</item>
+	</style>
+
+	<style name="AndLua8" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua8</item>
+        <item name="android:colorPrimaryDark">@color/andlua8</item>
+        <item name="android:colorAccent">@color/andlua8</item>
+		<item name="android:statusBarColor">@color/andlua8</item>
+	</style>
+
+	<style name="AndLua9" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua9</item>
+        <item name="android:colorPrimaryDark">@color/andlua9</item>
+        <item name="android:colorAccent">@color/andlua9</item>
+		<item name="android:statusBarColor">@color/andlua9</item>
+	</style>
+
+	<style name="AndLua10" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua10</item>
+        <item name="android:colorPrimaryDark">@color/andlua10</item>
+        <item name="android:colorAccent">@color/andlua10</item>
+		<item name="android:statusBarColor">@color/andlua10</item>
+	</style>
+
+	<style name="AndLua11" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua11</item>
+        <item name="android:colorPrimaryDark">@color/andlua11</item>
+        <item name="android:colorAccent">@color/andlua11</item>
+		<item name="android:statusBarColor">@color/andlua11</item>
+	</style>
+
+	<style name="AndLua12" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua12</item>
+        <item name="android:colorPrimaryDark">@color/andlua12</item>
+        <item name="android:colorAccent">@color/andlua12</item>
+		<item name="android:statusBarColor">@color/andlua12</item>
+	</style>
+
+	<style name="AndLua13" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua13</item>
+        <item name="android:colorPrimaryDark">@color/andlua13</item>
+        <item name="android:colorAccent">@color/andlua13</item>
+		<item name="android:statusBarColor">@color/andlua13</item>
+	</style>
+
+	<style name="AndLua14" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua14</item>
+        <item name="android:colorPrimaryDark">@color/andlua14</item>
+        <item name="android:colorAccent">@color/andlua14</item>
+		<item name="android:statusBarColor">@color/andlua14</item>
+	</style>
+
+	<style name="AndLua15" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua15</item>
+        <item name="android:colorPrimaryDark">@color/andlua15</item>
+        <item name="android:colorAccent">@color/andlua15</item>
+		<item name="android:statusBarColor">@color/andlua15</item>
+	</style>
+
+	<style name="AndLua16" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua16</item>
+        <item name="android:colorPrimaryDark">@color/andlua16</item>
+        <item name="android:colorAccent">@color/andlua16</item>
+		<item name="android:statusBarColor">@color/andlua16</item>
+	</style>
+
+	<style name="AndLua17" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua17</item>
+        <item name="android:colorPrimaryDark">@color/andlua17</item>
+        <item name="android:colorAccent">@color/andlua17</item>
+		<item name="android:statusBarColor">@color/andlua17</item>
+	</style>
+
+	<style name="AndLua18" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua18</item>
+        <item name="android:colorPrimaryDark">@color/andlua18</item>
+        <item name="android:colorAccent">@color/andlua18</item>
+		<item name="android:statusBarColor">@color/andlua18</item>
+	</style>
+
+	<style name="AndLua19" parent="@android:style/Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/andlua19</item>
+        <item name="android:colorPrimaryDark">@color/andlua19</item>
+        <item name="android:colorAccent">@color/andlua19</item>
+		<item name="android:statusBarColor">@color/andlua19</item>
+	</style>
+	
+</resources>

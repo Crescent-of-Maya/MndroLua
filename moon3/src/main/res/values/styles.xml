@@ -1,0 +1,8 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Moon3" parent="Theme.Material3.Light.NoActionBar">
+		<item name="android:statusBarColor">?android:attr/colorBackground</item>
+		<item name="android:navigationBarColor">?android:attr/colorBackground</item>
+    </style>
+    
+</resources>
