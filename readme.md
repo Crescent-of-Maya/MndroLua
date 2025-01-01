@@ -1,15 +1,19 @@
 ## MndroLua
 
-A modern fork of [AndroLua+](https://github.com/nirenr/AndroLua_pro)
+A modern fork of [AndroLua+](https://github.com/nirenr/AndroLua_pro), a lua IDE for android app developing🌷
 
-[AndroLua+ readme (Chinese)](readme-androlua.md)
+Chinese is the only language because it's a hard work for me to add multi languages support :(
+
+### Downloads
+
+[Releases](https://github.com/MoonLeeeaf/MndroLua/releases)
 
 ### Modifies
 
 App core:
   - Don't support Android 4.4 and under anymore (MinSdk = 21)
   - Resources reference should use full name such as `moon3.R.style.Moon3`
-  - Crash logcat save at `/sdcard/Android/data/{packageName}/files/crash`
+  - Crash-reports save at `/sdcard/Android/data/{packageName}/files/crash`
   - Use `moon3.R.style.Moon3` as the default app theme
   - Remove welcome.png (It's very outdated and uncomfortable)
   - Round icon support (icon_round.png)
@@ -33,7 +37,7 @@ Components:
 Editor:
   - Don't request all permissions in default and only file permissions
   - Night mode support
-  - Projects save at /sdcard/Documents as default
+  - Projects save at `/sdcard/Documents` as default
   - Android 11+ file permission support
   - Material Design 3 UI
   - New Code editor style
@@ -45,7 +49,7 @@ MIT License (MndroLua, AndroLua+, AndroLua and LuaJava)
 
 ### Credits
 
-MndroLua
+🌷MndroLua
   - [LlamaLuaEditor](https://github.com/nwdxlgzs/LlamaLuaEditor)
   - [AndroLua+](https://github.com/nirenr/AndroLua_pro)
     - [AndroLua](https://github.com/mkottman/AndroLua)
@@ -53,7 +57,7 @@ MndroLua
 
 ### Author
 
-MndroLua: GitHub @MoonLeeeaf
+🌷MndroLua: GitHub @MoonLeeeaf
   - AndroLua+: GitHub @nirenr
     - AndroLua: GitHub @mkottman
     - LuaJava: @Kepler
