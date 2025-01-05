@@ -57,10 +57,16 @@ end
 
 function onVersionChanged(n, o)
   local dlg = MaterialDialogBuilder(activity)
-  local title = "更新: " .. o .. " > " .. n
+  local title = "欢迎回家(^_^)"
   local msg = [[
-    魔改 - 1.0.0
-    
+    MndroLua 1.1.0
+    Moon3:
+      - 废除了 Reflect, 取而代之的是 ReflectUtils
+      - 添加 Unsafe 类(虽然没有覆盖多少方法 :(
+    Editor:
+      - 布局助手不再因为 TextureView 等不支持设置background的控件导致报错
+
+    MndroLua 1.0.0
     App core:
       - Don't support Android 4.4 and under anymore (MinSdk = 21)
       - Resources reference should use full name such as `moon3.R.style.Moon3`

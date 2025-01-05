@@ -1269,17 +1269,17 @@ end
 
 -- 获取服务实例, 返回Binder
 -- 可能为 null
-function getShizukuService()
-  -- from(静态类).call(方法名, 实例, 参数...)
-  return Reflect.from(Shizuku).call("requireService", nil, {})
+function getShizukuService()function getShizukuService()
+  return ReflectUtils.invokeStatic(Shizuku, "requireService", nil, {})
 end
 
 -- 通过Shizuku启动命令行, 返回ShizukuRemoteProcess
 -- 目前原方案(Shizuku.newProcess)已经被private, 据说v14要被移除
 function shizukuNewProcess(cmd, env, dir)
-  local c = ShizukuRemoteProcess.getDeclaredConstructor({ luajava.bindClass("moe.shizuku.server.IRemoteProcess") })
-  c.setAccessible(true)
-  return c.newInstance({ getShizukuService().newProcess(cmd, env, dir) })
+  return ReflectUtils.newInstance(ShizukuRemoteProcess,
+  { luajava.bindClass("moe.shizuku.server.IRemoteProcess") },
+  { getShizukuService().newProcess(cmd, env, dir) }
+  )
 end
 
 -- 执行命令

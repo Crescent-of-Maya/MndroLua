@@ -553,7 +553,8 @@ local function loadlayout(t, root, group,p)
   pcall(setMiniSize, view)
 
   if view.getBackground() == nil then
-    setBackground(view, gd)
+    -- TextureView不支持设置
+    pcall(function()setBackground(view, gd)end)
   end
 
   local params = ViewGroup.LayoutParams(checkValue(t.layout_width) or -2, checkValue(t.layout_height) or -2) --设置layout属性
