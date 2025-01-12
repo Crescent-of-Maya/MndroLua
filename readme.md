@@ -10,38 +10,7 @@ Chinese is the only language because it's a hard work for me to add multi langua
 
 ### Modifies
 
-App core:
-  - Don't support Android 4.4 and under anymore (MinSdk = 21)
-  - Resources reference should use full name such as `moon3.R.style.Moon3`
-  - Crash-reports save at `/sdcard/Android/data/{packageName}/files/crash`
-  - Use `moon3.R.style.Moon3` as the default app theme
-  - Remove welcome.png (It's very outdated and uncomfortable)
-  - Round icon support (icon_round.png)
-  - Ignore `theme` in init.lua
-  - Add `request_all_permissions_on_start` in init.lua (false in default, requests all permission at every `main.lua`)
-  - Add callback function: onRequestPermissionsResult(requestCode, permissionList, grantedPermissionsList)
-
-Java libraries:
-  - Add [Shziuku-API](https://github.com/RikkaApps/Shizuku-API) (Tips: MinSdk = 24)
-  - Add [HiddenApiByPass](https://github.com/LSPosed/AndroidHiddenApiBypass)
-  - Add [LlamaLuaEditor](https://github.com/nwdxlgzs/LlamaLuaEditor) (Removed AI features, disabled syntax checking in default and renamed packageName to com.luaeditor2)
-  - Add Moon3
-
-Lua libraries:
-  - Add javapackage.lua
-  - Add javaoverride.lua
-
-Components:
-  - Used [LlamaLuaEditor](https://github.com/nwdxlgzs/LlamaLuaEditor) instead of LuaEditor and let `com.androlua.LuaEditor` extend `com.luaeditor2.LuaEditor`
-
-Editor:
-  - Don't request all permissions in default and only file permissions
-  - Night mode support
-  - Projects save at `/sdcard/Documents` as default
-  - Android 11+ file permission support
-  - Material Design 3 UI
-  - New Code editor style
-  - A better layout editor
+See [this](https://github.com/Crescent-of-Maya/MndroLua/blob/main/app/src/main/assets/main.lua#L62) for more details🍉
 
 ### License
 
@@ -50,14 +19,19 @@ MIT License (MndroLua, AndroLua+, AndroLua and LuaJava)
 ### Credits
 
 🌷MndroLua
-  - [LlamaLuaEditor](https://github.com/nwdxlgzs/LlamaLuaEditor)
-  - [AndroLua+](https://github.com/nirenr/AndroLua_pro)
+  - [AndroidXml2AXml](https://github.com/JealousCat/AndroidXml2AXml) (For compiling AndroidXML)
+  - [JDom](https://github.com/hunterhacker/jdom) (For compiling AndroidXML)
+  - [Zip4j](https://github.com/srikanth-lingala/zip4j) (For packing apk)
+  - [LlamaLuaEditor](https://github.com/nwdxlgzs/LlamaLuaEditor) (For a better LuaEditor)
+  - [AndroLua+](https://github.com/nirenr/AndroLua_pro) (The core)
     - [AndroLua](https://github.com/mkottman/AndroLua)
     - LuaJava
 
-### Author
+Although some projects were not listed here, all projects that were listed in build.gradle are used as libraries for AndroLua projects :)
 
-🌷MndroLua: GitHub @MoonLeeeaf
-  - AndroLua+: GitHub @nirenr
-    - AndroLua: GitHub @mkottman
+### Authors
+
+🌷MndroLua: GitHub [@MoonLeeeaf](https://github.com/MoonLeeeaf)
+  - AndroLua+: GitHub [@nirenr](https://github.com/nirenr)
+    - AndroLua: GitHub [@mkottman](https://github.com/mkottman)
     - LuaJava: @Kepler
