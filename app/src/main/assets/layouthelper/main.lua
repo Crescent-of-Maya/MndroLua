@@ -535,7 +535,7 @@ func["子控件"]=function()
 end
 
 --添加视图对话框
-add_dlg=MaterialDialogBuilder(activity)
+add_dlg=MaterialDialog(activity)
 add_dlg.Title="添加"
 wdt_list=ListView(activity)
 add_dlg.onCancel=lambda:fd_dlg.show()

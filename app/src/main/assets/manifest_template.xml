@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:versionCode="${{ return init.appcode }}"
+    android:versionName="${{ return init.appver }}"
+    android:compileSdkVersion="34"
+    package="${{ return init.packagename }}">
+
+    <!-- 系统版本信息 -->
+    <uses-sdk
+        android:minSdkVersion="${{ return init.appsdk or 21 }}"
+        android:targetSdkVersion="30"/>
+
+    <!-- 系统权限列表 跟随init.lua -->
+    ${{
+        local ps = ""
+        for k,v in pairs(init.user_permission or {}) do
+            ps = ps .. "<uses-permission android:name=\"android.permission." .. v .. "\" />"
+        end
+        return ps
+    }}
+
+    <application
+        android:name="com.androlua.LuaApplication"
+        android:icon="@drawable/ic_launcher"
+        android:roundIcon="@drawable/ic_launcher_round"
+        android:label="${{ return init.appname }}"
+        android:largeHeap="true"
+        android:persistent="true"
+        android:resizeableActivity="true"
+        android:supportsPictureInPicture="true"
+        android:requestLegacyExternalStorage="true">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="4" />
+
+        <!-- 核心出装 -->
+        <activity
+            android:name="com.androlua.LuaActivity"
+            android:configChanges='orientation|screenSize|keyboardHidden'
+            android:label="${{ return init.appname }}"
+            android:theme="@style/Moon3">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="androlua" />
+                <data
+                    android:host="${{ return init.packagename }}" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 这到底是干什么的啊(大恼) -->
+        <activity
+            android:name="com.androlua.LuaActivityX"
+            android:configChanges='orientation|screenSize|keyboardHidden'
+            android:documentLaunchMode="intoExisting"
+            android:excludeFromRecents="false"
+            android:label="${{ return init.appname }}"
+            android:screenOrientation="portrait"
+            android:theme="@style/Moon3" />
+            
+        <!-- 主 Activity -->
+        <activity
+            android:name="com.androlua.Main"
+            android:label="${{ return init.appname }}"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            android:theme="@style/Moon3">
+            <!-- 可以在这里写 <intent-filter> 一般作为文件打开方式 -->
+        </activity>
+        
+        <!-- 启动 Activity, 负责初始化 -->
+        <activity
+            android:name="com.androlua.Welcome"
+            android:label="${{ return init.appname }}"
+            android:screenOrientation="portrait"
+            android:exported="true"
+            android:theme="@style/Moon3">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <!-- 泥人远古截图代码(甚至好像是用 Root 读写dev实现的) -->
+        <activity
+            android:name="com.nirenr.screencapture.ScreenCaptureActivity"
+            android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+        
+        <!-- 服务 -->
+        <service
+            android:name="com.androlua.LuaService"
+            android:enabled="true"/>
+
+        <!-- 辅助功能 -->
+        <service
+            android:name="com.androlua.LuaAccessibilityService"
+            android:enabled="${{ return table.find(init.user_permission or {}, 'BIND_ACCESSIBILITY_SERVICE') and true or false }}"
+            android:exported="true"
+            android:label="${{ return init.packagename }}"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+
+                <category android:name="android.accessibilityservice.category.FEEDBACK_AUDIBLE" />
+                <category android:name="android.accessibilityservice.category.FEEDBACK_HAPTIC" />
+                <category android:name="android.accessibilityservice.category.FEEDBACK_SPOKEN" />
+            </intent-filter>
+        </service>
+        
+        <provider
+            android:name="android.content.FileProvider"
+            android:authorities="${{ return init.packagename }}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/androlua_filepaths" />
+        </provider>
+        
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
+            android:authorities="${{ return init.packagename }}.shizuku"
+            android:multiprocess="false"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    
+    </application>
+
+</manifest>
+

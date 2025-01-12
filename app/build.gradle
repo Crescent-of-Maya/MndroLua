@@ -13,8 +13,8 @@ android {
         // 然而我需要最低兼容 sdk21, Shizuku并非必须
         // 本程序所生成的软件将不能提交给 Google play(至少和我没任何关系)
         targetSdk 30
-        versionCode 11000
-        versionName "1.1.0"
+        versionCode 20000
+        versionName "2.0.0"
         
         vectorDrawables { 
             useSupportLibrary true
@@ -61,6 +61,13 @@ android {
             debuggable true
             jniDebuggable true
         }
+        debugMin {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            
+            debuggable true
+            jniDebuggable true
+        }
     }
     /* externalNativeBuild {
         ndkBuild {
@@ -71,8 +78,9 @@ android {
     }
 }
 
+// 死代码会被R8优化 记得修改 proguard-rules.txt
 dependencies {
-    // 不知道为什么Release的时候会重复
+    // 不知道为什么Release的时候会重复(?)
     implementation 'com.android.support:support-annotations:28.0.0'
     
     implementation project(":moon3")
@@ -80,4 +88,10 @@ dependencies {
     implementation 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
     implementation "dev.rikka.shizuku:api:13.1.5"
     implementation "dev.rikka.shizuku:provider:13.1.5"
+    
+    implementation "net.lingala.zip4j:zip4j:2.11.5"
+    
+    implementation "org.jdom:jdom:2.0.2"
+    
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 }

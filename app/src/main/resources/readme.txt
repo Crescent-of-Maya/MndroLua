@@ -1,7 +1,7 @@
 本程序基于 MndroLua 开发
 
 如果需要定制, 请查阅源代码
-https://github.com/MoonLeeeaf/MndroLua
+https://github.com/Crescent-of-Maya/MndroLua
 
 安装软件前请确保来源安全
 以防不良软件造成的损害(如设备数据丢失等)

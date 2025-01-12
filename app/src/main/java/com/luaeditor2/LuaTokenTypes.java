@@ -9,6 +9,8 @@ public enum LuaTokenTypes {
     NEW_LINE,
     WHITE_SPACE,
     BAD_CHARACTER,
+    
+    NONE,
 
     NAME,
     NUMBER,
@@ -42,7 +44,6 @@ public enum LuaTokenTypes {
     IN,
     IF,
     OR,
-    DO,
     EQ,
     SHEBANG,
     NE,
@@ -83,6 +84,8 @@ public enum LuaTokenTypes {
     DEFER,
     WHEN,
     LAMBDA,
+    AT,
+    DO,
 
     IS,
     TRY,

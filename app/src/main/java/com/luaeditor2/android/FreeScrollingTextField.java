@@ -439,8 +439,9 @@ public class FreeScrollingTextField extends View
 
     public void format() {
         selectText(false);
-        AluaParser.lexer(new DocumentProvider(_hDoc), new Flag());
-        CharSequence text = AutoIndent.format(new DocumentProvider(_hDoc), _autoIndentWidth);
+        DocumentProvider dp = new DocumentProvider(_hDoc);
+        AluaParser.lexer(dp, new Flag());
+        CharSequence text = AutoIndent.format(dp, _autoIndentWidth);
         _hDoc.beginBatchEdit();
         _hDoc.deleteAt(0, _hDoc.docLength() - 1, System.nanoTime());
         _hDoc.insertBefore(text.toString().toCharArray(), 0, System.nanoTime());

@@ -379,8 +379,6 @@ public class AluaParser {
                 return Lexer.LOCAL;
             case " :global":
                 return Lexer.GLOBAL;
-            case " :asm":
-                return Lexer.KEYWORD;
         }
         return 0;
     }

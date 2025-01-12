@@ -1042,6 +1042,8 @@ public class LuaLexer {
         int[] zzTransL = ZZ_TRANS;
         int[] zzRowMapL = ZZ_ROWMAP;
         int[] zzAttrL = ZZ_ATTRIBUTE;
+        
+        // boolean doInFor = false;
 
         while (true) {
             zzMarkedPosL = zzMarkedPos;
@@ -1524,6 +1526,7 @@ public class LuaLexer {
                     case 169:
                         break;
                     case 69: {
+                        // doInFor = true;
                         return FOR;
                     }
                     case 170:

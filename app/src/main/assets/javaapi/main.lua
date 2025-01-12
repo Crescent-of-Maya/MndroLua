@@ -33,7 +33,7 @@ function copy(str)
 end
 
 
-dlg=MaterialDialogBuilder()-- Dialog(activity,autotheme())
+dlg=MaterialDialog()-- Dialog(activity,autotheme())
 dlg.setView(loadlayout(mlayout))
 dlg=dlg.create()
 curr_class=nil

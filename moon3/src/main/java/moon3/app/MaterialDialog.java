@@ -51,24 +51,24 @@ import java.util.Arrays;
 public class MaterialDialog extends AlertDialog implements DialogInterface.OnClickListener {
     
     // MaterialAlertDialogBuilder.java
-    private static final int DEF_STYLE_ATTR = R.attr.alertDialogStyle;
-    private static final int DEF_STYLE_RES = R.style.MaterialAlertDialog_MaterialComponents;
-    private static final int MATERIAL_ALERT_DIALOG_THEME_OVERLAY = R.attr.materialAlertDialogTheme;
-    private Drawable background;
-    private Rect backgroundInsets;
+    protected static final int DEF_STYLE_ATTR = R.attr.alertDialogStyle;
+    protected static final int DEF_STYLE_RES = R.style.MaterialAlertDialog_MaterialComponents;
+    protected static final int MATERIAL_ALERT_DIALOG_THEME_OVERLAY = R.attr.materialAlertDialogTheme;
+    protected Drawable background;
+    protected Rect backgroundInsets;
     
     // LuaDialog.java
-    private Context mContext;
-    private ListView mListView;
-    private String mMessage;
-    private String mTitle;
-    private View mView;
+    protected Context mContext;
+    protected ListView mListView;
+    protected String mMessage;
+    protected String mTitle;
+    protected View mView;
     
     // 修改
-    private ArrayList<DialogInterface.OnClickListener> mOnClickListeners = new ArrayList<DialogInterface.OnClickListener>();
+    protected ArrayList<DialogInterface.OnClickListener> mOnClickListeners = new ArrayList<DialogInterface.OnClickListener>();
 
     // MaterialAlertDialogBuilder.java
-    private static int getMaterialAlertDialogThemeOverlay(Context context) {
+    protected static int getMaterialAlertDialogThemeOverlay(Context context) {
         TypedValue materialAlertDialogThemeOverlay = MaterialAttributes.resolve(context, MATERIAL_ALERT_DIALOG_THEME_OVERLAY);
         if (materialAlertDialogThemeOverlay == null) {
             return 0;
@@ -77,7 +77,7 @@ public class MaterialDialog extends AlertDialog implements DialogInterface.OnCli
     }
 
     // MaterialAlertDialogBuilder.java
-    private static Context createMaterialAlertDialogThemedContext(Context context) {
+    protected static Context createMaterialAlertDialogThemedContext(Context context) {
         int themeOverlayId = getMaterialAlertDialogThemeOverlay(context);
         Context themedContext = MaterialThemeOverlay.wrap(context, null, DEF_STYLE_ATTR, DEF_STYLE_RES);
         if (themeOverlayId == 0) {
@@ -87,7 +87,7 @@ public class MaterialDialog extends AlertDialog implements DialogInterface.OnCli
     }
 
     // MaterialAlertDialogBuilder.java
-    private static int getOverridingThemeResId(Context context, int overrideThemeResId) {
+    protected static int getOverridingThemeResId(Context context, int overrideThemeResId) {
         if (overrideThemeResId == 0) {
             return getMaterialAlertDialogThemeOverlay(context);
         }
@@ -118,9 +118,9 @@ public class MaterialDialog extends AlertDialog implements DialogInterface.OnCli
         materialShapeDrawable.setFillColor(ColorStateList.valueOf(backgroundColor));
         if (VERSION.SDK_INT >= 28) {
             TypedValue typedValue = new TypedValue();
-            theme.resolveAttribute(16844145, typedValue, true);
+            theme.resolveAttribute(android.R.attr.dialogCornerRadius, typedValue, true);
             float dimension = typedValue.getDimension(getContext().getResources().getDisplayMetrics());
-            if (typedValue.type == 5 && dimension >= 0.0f) {
+            if (typedValue.type == TypedValue.TYPE_DIMENSION && dimension >= 0) {
                 materialShapeDrawable.setCornerSize(dimension);
             }
         }
@@ -130,9 +130,8 @@ public class MaterialDialog extends AlertDialog implements DialogInterface.OnCli
     // MaterialAlertDialogBuilder.java
     // 修改
     @Override
-    protected void onCreate(Bundle arg0) {
-        super.onCreate(arg0);
-        // TODO: Implement this method
+    protected void onCreate(Bundle b) {
+        super.onCreate(b);
         
         Window window = getWindow();
         View decorView = window.getDecorView();

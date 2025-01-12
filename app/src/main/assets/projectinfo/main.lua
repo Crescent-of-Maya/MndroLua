@@ -23,7 +23,7 @@ activity.setContentView(loadlayout("layout"))
 
 plist=ListView(activity)
 plist.dividerHeight = 0
-dlg=MaterialDialogBuilder(activity)
+dlg=MaterialDialog(activity)
 dlg.title="更改权限"
 dlg.view=plist
 dlg.setPositiveButton("确定",nil)

@@ -61,8 +61,8 @@ public class Activity extends android.app.Activity {
 				startForegroundService(i);
 			else
 				startService(i);
-		else
-			FastToast.shortSnack(this, "当前没有权限启动前台服务!").show();
+		/*else
+			FastToast.shortSnack(this, "当前没有权限启动前台服务!").show();*/
 	}
 
 	@Override
@@ -134,13 +134,22 @@ public class Activity extends android.app.Activity {
     }
 
 	@Override
-	public void setActionBar(Toolbar arg0) {
-		throw new UnsupportedOperationException("You needn't use a new Toolbar, please use getToolbar().");
+	public void setActionBar(Toolbar newToolbar) {
+		// throw new UnsupportedOperationException("You needn't use a new Toolbar, please use getToolbar().");
+        if (newToolbar == toolbar) toolbar.setVisibility(View.VISIBLE);
+        else {
+            toolbar.setVisibility(View.GONE);
+            super.setActionBar(newToolbar);
+        }
 	}
-
-	public Toolbar getToolbar() {
+    
+    public Toolbar getFirstToolbar() {
 		return toolbar;
 	}
+    
+    public CoordinatorLayout getRootContentViewHandler() {
+        return rootContentViewHandler;
+    }
 
 	// 重写设置视图方法 用以保持 Toolbar
 

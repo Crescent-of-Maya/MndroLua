@@ -8,7 +8,28 @@ import "android.content.*"
 import "autotheme"
 
 help=[===[
-@关于@
+@关于 MndroLua@
+@MndroLua, 为现代 Android 应用打造的 AndroLua+
+项目地址: https://github.com/Crescent-of-Maya/MndroLua
+
+满月之里 - 让科技再次伟大🌷
+©2024-2025 满月叶
+
+本项目继承 AndroLua+ 使用 MIT License 开源
+同样的, 请支持原作者
+禁止用于非法用途
+@
+@旧项目迁移以及 manifest.xml 相关@
+@MndroLua 在 1.2.0 后使用 LuaPacker 进行应用打包, 并全面支持 AndroidManifest.xml
+旧项目只需要复制 manifest_template.xml 到你的项目并改为 manifest.xml 即可
+
+使用 manifest.xml 可以更灵活地编写特殊应用, 以及更灵活的扩展
+你可以自由编辑项目中的 manifest.xml, 并使用 ${{ [代码块] }} 来使用 Lua 代码完成自动化
+例如 ${{ return 114514 }}
+
+关于 manifest_template.xml, 可以从IDE安装包中提取, 或者请见 https://github.com/Crescent-of-Maya/MndroLua
+@
+@关于 AndroLua+@
 @AndroLua是基于LuaJava开发的安卓平台轻量级脚本编程语言工具，既具有Lua简洁优雅的特质，又支持绝大部分安卓API，可以使你在手机上快速编写小型应用。
 官方QQ群：236938279(已满)
 http://jq.qq.com/?_wv=1027&k=dcofRr

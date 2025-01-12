@@ -7,7 +7,6 @@
 -printmapping mapping.txt
 -optimizations !code/simplification/arithmetic,!field/,!class/merging/
 -keepattributes Annotation
--keep class com.baidu.mobstat.**{*;}
 
 -keep class android.app.**{
 public <methods>;
@@ -67,3 +66,32 @@ public <fields>;
 -keep public class * extends android.preference.PreferenceActivity
 -keep public class * extends android.accessibilityservice.AccessibilityService
 
+-keep class net.lingala.zip4j.**{
+public <methods>;
+public <fields>;
+}
+
+-keep class moe.shizuku.**{
+public <methods>;
+public <fields>;
+}
+
+-keep class moon3.**{
+public <methods>;
+public <fields>;
+}
+
+-keep class rikka.**{
+public <methods>;
+public <fields>;
+}
+
+-keep class org.lsposed.hiddenapibypass.**{
+public <methods>;
+public <fields>;
+}
+
+-keep class io.github.moonleeeaf.**{
+public <methods>;
+public <fields>;
+}

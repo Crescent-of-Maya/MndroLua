@@ -50,6 +50,10 @@ public class ReflectUtils {
         }
     }
     
+    public static <T> T invokeMethod(Object instance, String n, Class<?>[] cls, Object... args) {
+        return invoke(instance,  n, cls, args);
+    }
+    
     public static <T> T invokeStatic(Class<?> clazz, String n, Class<?>[] cls, Object... args) {
         try {
             Method m = clazz.getDeclaredMethod(n, cls);
@@ -59,6 +63,10 @@ public class ReflectUtils {
             Log.e("Reflect","", e);
             return null;
         }
+    }
+    
+    public static <T> T invokeStaticMethod(Class<?> clazz, String n, Class<?>[] cls, Object... args) {
+        return invokeStatic(clazz,  n, cls, args);
     }
     
     public static <T> T newInstance(Class<T> clazz, Class<?>[] cls, Object... args) {

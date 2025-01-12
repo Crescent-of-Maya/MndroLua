@@ -30,9 +30,8 @@ import java.util.*;
  * @author user
  * 
  */
-public class CrashHandler implements UncaughtExceptionHandler
-{
-
+public class CrashHandler implements UncaughtExceptionHandler {
+    
 	public static final String TAG = "CrashHandler";
 
 	//系统默认的UncaughtException处理类 

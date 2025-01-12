@@ -1,8 +1,8 @@
-package com.myopicmobile.textwarrior.common;
+package com.luaeditor2.common;
 
-import com.androlua.LuaLexer;
-import com.androlua.LuaTokenTypes;
-
+import android.util.Log;
+import com.luaeditor2.LuaLexer;
+import com.luaeditor2.LuaTokenTypes;
 import java.io.IOException;
 
 public class AutoIndent {
@@ -15,7 +15,10 @@ public class AutoIndent {
                 if (type == null) {
                     break;
                 }
-                if (lexer.yytext().equals("switch"))
+                
+                String yytext = lexer.yytext();
+                // Log.e("lua", type.toString() + " " + yytext);
+                if (yytext.equals("switch"))
                     idt += 1;
                 else
                     idt += indent(type);
@@ -36,6 +39,7 @@ public class AutoIndent {
             case REPEAT:
             case LCURLY:
             case SWITCH:
+            case DO:
                 return 1;
             case UNTIL:
             case END:

@@ -56,9 +56,28 @@ if not checkStoragePermission() then
 end
 
 function onVersionChanged(n, o)
-  local dlg = MaterialDialogBuilder(activity)
-  local title = "欢迎回家(^_^)"
+  local dlg = MaterialDialog(activity)
+  local title = "欢迎回家~"
   local msg = [[
+    MndroLua 2.0.0
+    Editor: 
+      - 运行代码前只针对 .lua .aly 检查语法错误, 并不再直接跳转语法错误所在行(用 Snackbar Action 取代)
+      - 使用 luapacker.lua 代替 bin.lua 进行打包(但是还是不支持V2签名 :(
+      - 由于 luapacker.lua 的加持, 现在还支持了 manifest.xml 的编译 (≧▽≦) 可以自由处理清单文件啦(^_-) (旧项目需要简单迁移, 详情请看帮助)
+      - 因为上面, 所以新项目会多一个 manifest.xml
+    Moon3:
+      - FastToast 针对 Moon3 提供的 Activity 基类进行优化(不需要自己获取 CoordinatorLayout, 当然, 传入View除外)
+      - FastToast 在构建 Snackbar 时, 自动解除文本长度限制
+      - 添加 MaterialProgressDialog
+      - 删除 ProgressDialogBuilder
+      - 删除 MaterialDialogBuilder
+    LuaEditor:
+      - 通过替换原来的 AutoIndent.java 修复了格式化代码问题
+      - 基于上述修改再修改, 完美支持了 do end 代码块
+    Java Libraries:
+      - 添加 Zip4j
+      - 添加 JDom
+
     MndroLua 1.1.0
     Moon3:
       - 废除了 Reflect, 取而代之的是 ReflectUtils
@@ -731,7 +750,6 @@ lcode = [[
 upcode = [[
 user_permission={
   "INTERNET",
-  "WRITE_EXTERNAL_STORAGE",
 }
 ]]
 
@@ -883,9 +901,10 @@ function create_project()
 
   end
   luadir = luaprojectdir .. appname .. "/"
-  write(luadir .. "init.lua", string.format("appname=\"%s\"\nappver=\"1.0\"\npackagename=\"%s\"\n%s", appname, packagename, upcode))
+  write(luadir .. "init.lua", string.format("appname=\"%s\"\nappver=\"1.0.0\"appcode=\"10000\"\npackagename=\"%s\"\n%s", appname, packagename, upcode))
   write(luadir .. "main.lua", pcode)
   write(luadir .. "layout.aly", lcode)
+  write(luadir .. "manifest.xml", io.open(luajava.luadir .. '/manifest_template.xml', 'r'):read("*a"))
   --project_dlg.hide()
   luapath = luadir .. "main.lua"
   read(luapath)
@@ -918,10 +937,10 @@ end
 
 function read(path)
 
-  local f = io.open(path, "r")
+  local f, err = io.open(path, "r")
   if f == nil then
     --FastToast.shortSnack(activity,"打开文件出错.").show()
-    error()
+    error(err)
     return
   end
   local str = f:read("*all")
@@ -970,7 +989,7 @@ function read(path)
     write(luaproj, string.format("luaproject=%q", luaproject))
     --FastToast.shortSnack(activity,"打开工程.").show()
    else
-    activity.setTitle("AndroLua+")
+    activity.setTitle("MndroLua")
     luaproject = nil
     write(luaproj, "luaproject=nil")
     --FastToast.shortSnack(activity,"打开文件.").show()
@@ -1054,6 +1073,24 @@ function create_aly()
   --create_dlg.hide()
 end
 
+function create_file()
+  luapath = luadir .. create_e.getText().toString()
+  if not pcall(read, luapath) then
+    f = io.open(luapath, "a")
+    f:write(lcode)
+    f:close()
+    table.insert(history, 1, luapath)
+    editor.setText(lcode)
+    write(luaconf, string.format("luapath=%q", luapath))
+    FastToast.shortSnack(activity,"新建文件: "..luapath).show()
+   else
+    FastToast.shortSnack(activity,"打开文件: ".. luapath).show()
+  end
+  write(luaconf, string.format("luapath=%q", luapath))
+  activity.getActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
+  --create_dlg.hide()
+end
+
 function open(p)
   if p == luadir then
     return nil
@@ -1107,7 +1144,7 @@ function list(v, p)
     local name = fs[n].getName()
     if fs[n].isDirectory() then
       table.insert(td, name .. "/")
-     elseif name:find("%.lua$") or name:find("%.aly$") or name:find("%.alp$") then
+     elseif fs[n].isFile() then--name:find("%.lua$") or name:find("%.aly$") or name:find("%.alp$") then
       table.insert(tf, name)
     end
   end
@@ -1406,13 +1443,19 @@ func.check = function(b)
   src = src.toString()
   if luapath:find("%.aly$") then
     src = "return " .. src
+   elseif not luapath:find("%.lua") then
+    return true
   end
   local _, data = loadstring(src)
 
   if data then
     local _, _, line, data = data:find(".(%d+).(.+)")
-    editor.gotoLine(tonumber(line))
-    FastToast.shortSnack(activity,":").show()
+    -- editor.gotoLine(tonumber(line))
+    FastToast.shortSnack(activity,line .. ": " .. data).setAction("跳转", {
+      onClick = function()
+        editor.gotoLine(tonumber(line))
+      end
+    }).show()
     return true
    elseif b then
    else
@@ -1455,13 +1498,46 @@ func.luac = function()
   end
 end
 
+function postOnMainThread(func)
+  Handler(Looper.getMainLooper()).post({ run = func })
+end
+
 func.build = function()
   save()
   if not luaproject then
     FastToast.shortSnack(activity,"仅支持工程打包").show()
     return
   end
-  bin(luaproject .. "/")
+  --bin(luaproject .. "/")
+
+  local luapacker = require("luapacker")
+  local dialog = MaterialProgressDialog(this)
+  dialog.setMessage("准备开始打包...")
+  luapacker.signApk = function(apk)
+    require 'import'
+    compile "sign"
+    import "apksigner.Signer"
+    io.open(apk .. '_unsigned.apk', 'w'):write(io.open(apk, 'r'):read("*a")):close()
+    Signer.sign(apk .. '_unsigned.apk', apk)
+  end
+  luapacker.pack(luaproject, {
+    onStart = function()
+      postOnMainThread(lambda:dialog.show())
+    end,
+    onUpdate = function(msg)
+      dialog.setMessage(msg)
+    end,
+    onFinish = function(apk)
+      postOnMainThread(lambda:dialog.hide())
+      FastToast.longSnack(this, "打包完毕: " .. apk).setAction("安装", {
+        onClick = lambda:activity.installApk(apk)
+      }).show()
+    end,
+    onError = function(e)
+      postOnMainThread(lambda:dialog.hide())
+      FastToast.longSnack(this, "打包失败: " .. e).show()
+    end,
+  })
 end
 
 buildfile = function()
@@ -1819,8 +1895,8 @@ function create_create_dlg()
   create_e = EditText(activity)
   create_dlg.setView(create_e)
   create_dlg.setPositiveButton(".lua", { onClick = create_lua })
-  create_dlg.setNegativeButton("dir", { onClick = create_dir })
-  create_dlg.setNeutralButton(".aly", { onClick = create_aly })
+  create_dlg.setNegativeButton("目录", { onClick = create_dir })
+  create_dlg.setNeutralButton("文件", { onClick = create_file })--create_aly })
 end
 
 function create_project_dlg()
@@ -2069,7 +2145,7 @@ end
 --editor.setWordWrap(true)
 --自动缩进
 editor.setAutoIndentWidth(2)
---隐藏行数
+--显示行数
 editor.setShowLineNumbers(true)
 --字体大小
 editor.setTextSize(42)
@@ -2082,3 +2158,13 @@ end
 --自定义关键词
 editor.addNames(String("").split(" "))
 
+--[[
+while false do
+  for i=1, 10 do
+    do
+      院审()
+      print("sb")
+    end
+  end
+end
+]]

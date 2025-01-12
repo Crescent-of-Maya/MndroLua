@@ -108,8 +108,8 @@ public class LuaDexLoader {
 
     public DexClassLoader loadDex(String path) throws LuaException {
         LuaDexClassLoader dex = dexCache.get(path);
-        if(dex==null)
-           dex = loadApp(path);
+        /*if(dex==null)
+           dex = loadApp(path);*/
         if (dex == null){
             String name = path;
             if (path.charAt(0) != '/')
