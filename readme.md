@@ -13,6 +13,10 @@ Chinese is the only language in this IDE because it's a hard work for me to add 
 See [this](https://github.com/Crescent-of-Maya/MndroLua/blob/main/app/src/main/assets/main.lua#L62) for more details (Chinese)🍉
 
 ### New features
+
+<details>
+  <summary>New features that were added in MndroLua</summary>
+  
 A modern and beautiful UI with night mode support:
 ![A materiel design 3 based UI, with code editor](https://github.com/user-attachments/assets/e47c6ad2-3166-425e-859f-dfa75d2a233d)
 
@@ -46,6 +50,8 @@ local t = NewTextView(this)
 t.text = "Test114514"
 activity.setContentView(t)
 ```
+
+</details>
 
 ### License
 
