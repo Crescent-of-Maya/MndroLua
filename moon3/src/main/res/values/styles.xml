@@ -5,4 +5,18 @@
 		<item name="android:navigationBarColor">?android:attr/colorBackground</item>
     </style>
     
+    <style name="Moon3.TextAppearance">
+    </style>
+
+    <style name="Moon3.TextAppearance.ToolbarTitle">
+        <!-- Medium: 18sp -->
+        <item name="android:textSize">20sp</item>
+    </style>
+    
+    <style name="Moon3.TextAppearance.ToolbarSubTitle">
+        <!-- Small: 14sp -->
+        <item name="android:textSize">15.5sp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+    
 </resources>

@@ -13,8 +13,8 @@ android {
         // 然而我需要最低兼容 sdk21, Shizuku并非必须
         // 本程序所生成的软件将不能提交给 Google play(至少和我没任何关系)
         targetSdk 30
-        versionCode 30000
-        versionName "3.0.0"
+        versionCode 30100
+        versionName "3.0.1"
         
         vectorDrawables { 
             useSupportLibrary true

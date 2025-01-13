@@ -59,6 +59,9 @@ function onVersionChanged(n, o)
   local dlg = MaterialDialog(activity)
   local title = "欢迎回家~"
   local msg = [[
+    MndroLua 3.0.1
+    UI调整: moon3.widget.Toolbar 使用更加接近 android.widget.Toolbar 的文字样式 :)
+
     MndroLua 3.0.0
     破坏性修改: 本项目迁移 AndroidX, 所有的旧方法应该被修改 例如 getActionBar -> getSupportActionBar
 

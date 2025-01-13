@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import androidx.appcompat.widget.Toolbar;
+import moon3.widget.Toolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.DynamicColorsOptions;
 import com.google.android.material.color.MaterialColors;
@@ -157,7 +157,7 @@ public class Activity extends androidx.appcompat.app.AppCompatActivity { //andro
     }
     
 	@Override
-	public void setSupportActionBar(Toolbar newToolbar) {
+	public void setSupportActionBar(androidx.appcompat.widget.Toolbar newToolbar) {
 		// throw new UnsupportedOperationException("You needn't use a new Toolbar, please use getToolbar().");
         if (newToolbar == toolbar) toolbar.setVisibility(View.VISIBLE);
         else {
