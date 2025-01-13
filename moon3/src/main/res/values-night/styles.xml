@@ -4,5 +4,5 @@
 		<item name="android:statusBarColor">?android:attr/colorBackground</item>
 		<item name="android:navigationBarColor">?android:attr/colorBackground</item>
     </style>
-    
+   
 </resources>

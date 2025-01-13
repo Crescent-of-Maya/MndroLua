@@ -8,10 +8,10 @@ import "android.content.*"
 import "layout"
 classes=require "android"
 activity.setTitle('需要导入的类')
-import "autotheme"
-activity.setTheme(autotheme())
+activity.useDynamicColors()
+--import "autotheme"
+--activity.setTheme(autotheme())
 activity.setContentView(loadlayout(layout))
-
 
 function fiximport(path)
   require "import"

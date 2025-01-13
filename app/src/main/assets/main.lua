@@ -59,6 +59,9 @@ function onVersionChanged(n, o)
   local dlg = MaterialDialog(activity)
   local title = "欢迎回家~"
   local msg = [[
+    MndroLua 3.0.0
+    破坏性修改: 本项目迁移 AndroidX, 所有的旧方法应该被修改 例如 getActionBar -> getSupportActionBar
+
     MndroLua 2.0.0
     Editor: 
       - 运行代码前只针对 .lua .aly 检查语法错误, 并不再直接跳转语法错误所在行(用 Snackbar Action 取代)
@@ -683,7 +686,7 @@ if e then
 end
 activity.getWindow().setSoftInputMode(0x10)
 
---activity.getActionBar().show()
+--activity.getSupportActionBar().show()
 history = {}
 luahist = luajava.luadir .. "/lua.hist"
 luadir = luajava.luaextdir .. "/" or "/sdcard/Document/MndroLua/"
@@ -704,7 +707,7 @@ if luaproject then
   end
 end
 
-activity.getActionBar().setDisplayShowHomeEnabled(false)
+-- activity.getSupportActionBar().setDisplayShowHomeEnabled(false)
 luabindir = luajava.luaextdir .. "/bin/"
 code = [===[
 require "import"
@@ -951,7 +954,7 @@ function read(path)
   end
   editor.setText(str)
 
-  activity.getActionBar().setSubtitle(".." .. path:match("(/[^/]+/[^/]+)$"))
+  activity.getSupportActionBar().setSubtitle(".." .. path:match("(/[^/]+/[^/]+)$"))
   luapath = path
   if history[luapath] then
     editor.setSelection(history[luapath])
@@ -967,7 +970,7 @@ function read(path)
   write(luaconf, string.format("luapath=%q", path))
   if luaproject and path:find(luaproject, 1, true) then
     --FastToast.shortSnack(activity,"打开文件.").show()
-    activity.getActionBar().setSubtitle(path:sub(#luaproject))
+    activity.getSupportActionBar().setSubtitle(path:sub(#luaproject))
     return
   end
 
@@ -985,7 +988,7 @@ function read(path)
   if e then
     activity.setTitle(tostring(p.appname))
     luaproject = dir
-    activity.getActionBar().setSubtitle(path:sub(#luaproject))
+    activity.getSupportActionBar().setSubtitle(path:sub(#luaproject))
     write(luaproj, string.format("luaproject=%q", luaproject))
     --FastToast.shortSnack(activity,"打开工程.").show()
    else
@@ -1040,7 +1043,7 @@ function create_lua()
     FastToast.shortSnack(activity,"打开文件: ".. luapath).show()
   end
   write(luaconf, string.format("luapath=%q", luapath))
-  activity.getActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
+  activity.getSupportActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
   --create_dlg.hide()
 end
 
@@ -1069,7 +1072,7 @@ function create_aly()
     FastToast.shortSnack(activity,"打开文件: ".. luapath).show()
   end
   write(luaconf, string.format("luapath=%q", luapath))
-  activity.getActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
+  activity.getSupportActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
   --create_dlg.hide()
 end
 
@@ -1087,7 +1090,7 @@ function create_file()
     FastToast.shortSnack(activity,"打开文件: ".. luapath).show()
   end
   write(luaconf, string.format("luapath=%q", luapath))
-  activity.getActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
+  activity.getSupportActionBar().setSubtitle(".." .. luapath:match("(/[^/]+/[^/]+)$"))
   --create_dlg.hide()
 end
 

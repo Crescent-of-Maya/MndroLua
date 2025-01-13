@@ -43,6 +43,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ArrayListAdapter;
@@ -322,6 +323,7 @@ public class LuaActivity extends moon3.app.Activity implements LuaBroadcastRecei
         if (onAccessibilityEvent.isFunction())
             LuaAccessibilityService.onAccessibilityEvent = onAccessibilityEvent.getFunction();
 
+        invalidateOptionsMenu();
     }
 
     public void setFragment(Fragment fragment) {
@@ -965,20 +967,29 @@ public class LuaActivity extends moon3.app.Activity implements LuaBroadcastRecei
         return super.onTouchEvent(event);
     }
 
+    // byd 这方法 不会主动调用
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // TODO: Implement this method
         optionsMenu = menu;
-        runFunc("onCreateOptionsMenu", menu);
-        return super.onCreateOptionsMenu(menu);
+        Object ret = runFunc("onCreateOptionsMenu", menu);
+        // 不返回true的话 Memu是不会更新的
+        // 直接向前兼容得了
+        // if (ret != null && ret.getClass() == Boolean.class && (Boolean) ret)
+        return true;
+        // return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        
         // TODO: Implement this method
         Object ret = null;
         if (!item.hasSubMenu())
             ret = runFunc("onOptionsItemSelected", item);
+        // 看不懂啥是featureId 凑合用用
+        if (!item.hasSubMenu())
+            runFunc("onMenuItemSelected", Window.FEATURE_OPTIONS_PANEL, item);
         if (ret != null && ret.getClass() == Boolean.class && (Boolean) ret)
             return true;
         return super.onOptionsItemSelected(item);
@@ -988,6 +999,7 @@ public class LuaActivity extends moon3.app.Activity implements LuaBroadcastRecei
         return optionsMenu;
     }
 
+    /*
     @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         // TODO: Implement this method
@@ -995,6 +1007,7 @@ public class LuaActivity extends moon3.app.Activity implements LuaBroadcastRecei
             runFunc("onMenuItemSelected", featureId, item);
         return super.onMenuItemSelected(featureId, item);
     }
+    */
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

@@ -8,6 +8,25 @@ Chinese is the only language in this IDE because it's a hard work for me to add 
 
 [Releases](https://github.com/MoonLeeeaf/MndroLua/releases)
 
+### Break changes
+
+<details>
+  <summary>Break changes since MndroLua 3.0.0</summary>
+  
+Since 3.0.0, Moon3 used AndroidX and moved Activity to AppCompatActivity
+
+Changes of LuaActivity:
+```
+onMenuItemSelected -> onOptionsItemSelected, featureId = Window.FEATURE_OPTIONS_PANEL
+onCreateOptionsMenu -> true
+```
+
+All of projects should run debug and replace some methods.
+
+For example, `getActionBar` should be replaced with `getSupportActionBar`
+
+</details>
+
 ### Modifies
 
 See [this](https://github.com/Crescent-of-Maya/MndroLua/blob/main/app/src/main/assets/main.lua#L62) for more details (Chinese)🍉

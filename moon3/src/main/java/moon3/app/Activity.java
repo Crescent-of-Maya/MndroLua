@@ -4,10 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.color.DynamicColorsOptions;
 import com.google.android.material.color.MaterialColors;
@@ -16,12 +18,13 @@ import moon3.utils.AndroidUtils;
 import moon3.utils.FastToast;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.color.DynamicColors;
+import moon3.utils.ReflectUtils;
 
 /**
  * @Author 满月叶
  * @Date 2024/02/06 09:34
  */
-public class Activity extends android.app.Activity {
+public class Activity extends androidx.appcompat.app.AppCompatActivity { //android.app.Activity {
 	protected Toolbar toolbar;
 	protected CoordinatorLayout rootContentViewHandler;
     protected LinearLayout rootContentView;
@@ -64,13 +67,13 @@ public class Activity extends android.app.Activity {
 		/*else
 			FastToast.shortSnack(this, "当前没有权限启动前台服务!").show();*/
 	}
-
-	@Override
-	protected void onDestroy() {
-		onDestroyListeners.forEach((l) -> l.onDestroy());
-
-		super.onDestroy();
-	}
+    
+    
+    @Override
+    protected void onDestroy() {
+        onDestroyListeners.forEach((l) -> l.onDestroy());
+        super.onDestroy();
+    }
     
     public void useDynamicColors() {
         // Android 12+ 动态配色
@@ -95,10 +98,10 @@ public class Activity extends android.app.Activity {
     */
 
 	@Override
-	protected void onCreate(Bundle arg0) {
-		super.onCreate(arg0);
-        
+	protected void onCreate(Bundle savedInstance) {
         setTheme(moon3.R.style.Moon3);
+        
+		super.onCreate(savedInstance);
         
         if (!AndroidUtils.isNightMode(this) && AndroidUtils.checkSdkVersion(23))
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -119,10 +122,19 @@ public class Activity extends android.app.Activity {
 		root.setOrientation(LinearLayout.VERTICAL);
 
 		// Give up
+        /*
 		if (toolbar == null)
 			toolbar = new Toolbar(this);
-
+        
+        toolbar.setPopupTheme(com.google.android.material.R.style.Widget_Material3_PopupMenu_Overflow);
+        
 		super.setActionBar(toolbar);
+        */
+        if (toolbar == null)
+			toolbar = new Toolbar(this);
+        
+        super.setSupportActionBar(toolbar);
+        
 		root.addView(toolbar, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT));
 		root.addView(rootContentViewHandler, new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.MATCH_PARENT));
 
@@ -133,13 +145,25 @@ public class Activity extends android.app.Activity {
         return AndroidUtils.isNightMode(this);
     }
 
+    @Override
+    public boolean onMenuOpened(int featureId, Menu menu) {
+        try {
+            ReflectUtils.invokeMethod(menu, "setOptionalIconsVisible", new Class[] { boolean.class }, new Object[] { true });
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        return super.onMenuOpened(featureId, menu);
+    }
+    
 	@Override
-	public void setActionBar(Toolbar newToolbar) {
+	public void setSupportActionBar(Toolbar newToolbar) {
 		// throw new UnsupportedOperationException("You needn't use a new Toolbar, please use getToolbar().");
         if (newToolbar == toolbar) toolbar.setVisibility(View.VISIBLE);
         else {
             toolbar.setVisibility(View.GONE);
-            super.setActionBar(newToolbar);
+            //super.setActionBar(newToolbar);
+            super.setSupportActionBar(toolbar);
         }
 	}
     
