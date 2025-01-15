@@ -59,6 +59,10 @@ function onVersionChanged(n, o)
   local dlg = MaterialDialog(activity)
   local title = "欢迎回家~"
   local msg = [[
+    MndroLua 3.0.2
+    也就加了个AboutDialog 属实是水了个版本()
+    另外移除了 jniLibs 取而代之的是编译 jni
+
     MndroLua 3.0.1
     UI调整: moon3.widget.Toolbar 使用更加接近 android.widget.Toolbar 的文字样式 :)
 
@@ -863,6 +867,9 @@ m = {
       title = "联系作者",
       id = "more_qq", },]]
     { MenuItem,
+      title = "更新日志",
+      id = "update_log", },
+    { MenuItem,
       title = "关于",
       id = "more_about", },
   },
@@ -1609,8 +1616,18 @@ func.qq = function()
   joinQQGroup(key)
 end
 
-func.about = function()
+func.update_log = function()
   onVersionChanged("", "")
+end
+
+import "android.text.Html"
+
+func.about = function()
+  local dialog = AboutDialog(this)
+  .updateInfo(this, true)
+  .setMoreInfo(Html.fromHtml("在 <a href='https://github.com/Crescent-of-Maya/MndroLua'>GitHub</a> 查看源码"))
+  dialog.MoreInfoView.MovementMethod = LinkMovementMethod.getInstance()
+  dialog.show()
 end
 
 func.fiximport = function()
@@ -1653,6 +1670,7 @@ function onMenuItemSelected(id, item)
     [optmenu.more_manual] = func.manual,
     [optmenu.more_donation] = func.donation,
     --[optmenu.more_qq] = func.qq,
+    [optmenu.update_log] = func.update_log,
     [optmenu.more_about] = func.about,
     [optmenu.plugin] = func.plugin,
   }

@@ -5,6 +5,7 @@ plugins {
 android {
     namespace 'io.github.moonleeeaf.androlua'
     compileSdk 34
+    ndkVersion "20.1.5948944"
     
     defaultConfig {
         applicationId "io.github.moonleeeaf.androlua"
@@ -13,32 +14,16 @@ android {
         // 然而我需要最低兼容 sdk21, Shizuku并非必须
         // 本程序所生成的软件将不能提交给 Google play(至少和我没任何关系)
         targetSdk 30
-        versionCode 30100
-        versionName "3.0.1"
+        versionCode 30200
+        versionName "3.0.2"
         
         vectorDrawables { 
             useSupportLibrary true
         }
-        
-        // 目前暂时不需要用Android-IDE编译C代码
-        // 因此先用以前编译的代码
+       
         // AndLua原本编译的无法使用 string.dump
         // 因此需要自己编译一份
-        
-        /* ndk {
-            abiFilters 'armeabi-v7a'
-        } */
     }
-	
-    /*
-    // 该死的 为什么死活没有aidl编译过程
-    // 真tm该死 浪费半天时间
-    sourceSets {
-        main {
-            java.srcDirs = ['src/main/java', 'src/main/aidl']
-        }
-    }
-    */
     
     packagingOptions {
         exclude 'META-INF/proguard/androidx-annotations.pro'
@@ -61,19 +46,12 @@ android {
             debuggable true
             jniDebuggable true
         }
-        debugMin {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-            
-            debuggable true
-            jniDebuggable true
-        }
     }
-    /* externalNativeBuild {
+    externalNativeBuild {
         ndkBuild {
             path 'src/main/jni/android.mk'
         }
-    } */
+    }
     productFlavors {
     }
 }

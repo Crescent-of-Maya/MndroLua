@@ -11,8 +11,8 @@ android {
         // applicationId "moon3"
         minSdk 21
         targetSdk 34
-        versionCode 20100
-        versionName "2.0.1"
+        versionCode 21000
+        versionName "2.1.0"
         
         vectorDrawables { 
             useSupportLibrary true
