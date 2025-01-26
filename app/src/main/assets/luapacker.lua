@@ -9,22 +9,34 @@ end
 
 -- 编译 Lua
 function compileLua(src)
-  io.open(src, "w"):write(string.dump(load(io.open(src, "r"):read("*a")))):close()
+  local func, err
+  if src:find("%.aly$") then
+    func, err = load("return " .. io.open(src, "r"):read("*a"))
+   else
+    func, err = loadfile(src)
+  end
+  if err then
+    error(err)
+  end
+  io.open(src, "wb"):write(
+  string.dump(
+  func,
+  true
+  )
+  ):close()
 end
 
 -- 编译 XML
 function compileXML(from, to)
-  local Files = luajava.bindClass("java.nio.file.Files")
-  local Path = luajava.bindClass("java.nio.file.Path")
+  local FileOutputStream = luajava.bindClass("java.io.FileOutputStream")
   local StandardOpenOption = luajava.bindClass("java.nio.file.StandardOpenOption")
   local AndroidXML = luajava.bindClass("io.github.moonleeeaf.androidxml.AndroidXML")
   local String = luajava.bindClass("java.lang.String")
 
   local xml = io.open(from, "r"):read("*a")
-  Files.write(Path.of(to, {}),
-  AndroidXML.encode(activity,xml),
-  {StandardOpenOption.WRITE, StandardOpenOption.CREATE}
-  )
+  local fos = FileOutputStream(to)
+  fos.write(AndroidXML.encode(activity,xml))
+  fos.close()
 end
 
 -- 获取文件列表

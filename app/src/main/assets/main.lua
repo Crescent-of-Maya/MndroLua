@@ -59,6 +59,10 @@ function onVersionChanged(n, o)
   local dlg = MaterialDialog(activity)
   local title = "欢迎回家~"
   local msg = [[
+    MndroLua 3.0.3
+    修复了 LuaPacker 编译会出空代码的问题()
+    另外会检查语法错误
+    
     MndroLua 3.0.2
     也就加了个AboutDialog 属实是水了个版本()
     另外移除了 jniLibs 取而代之的是编译 jni
